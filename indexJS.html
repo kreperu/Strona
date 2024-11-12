@@ -10,60 +10,17 @@
     <link rel="stylesheet" href="dataDisplay.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./leaflet-ajax/dist/leaflet.ajax.js"></script>
     <script src="voivodeships.json"></script>
     <script src="powiaty.json"></script>
     <script src="gminy.json"></script>
 
     <script src="config.js"></script>
+    <script src="dataRequests.js"></script>
+    <script src="dataDisplay.js"></script>
 </head>
 <body>
     <div id="map"></div>
-    <script src="dataRequests.js"></script>
     <script>
-        var voivodeships = new L.GeoJSON(voiv, {style: {fillColor:'#ff0000',fillOpacity:0.01,weight:4,opacity:1,color:'#ff0000'}});
-        var powiats = new L.GeoJSON(powiat, {style: {fillColor:'#ff00ff',fillOpacity:0.01,weight:2,opacity:1,color:'#ff00ff'}});
-        var gminas = new L.GeoJSON(gmina, {style: {fillColor: '#0000ff',fillOpacity:0.05,weight:1,opacity:1,color:'#0000dd'}});
-
-        function removeAllBorders(map) {
-            if(map.hasLayer(voivodeships)) voivodeships.remove();
-            if(map.hasLayer(powiats)) powiats.remove();
-            if(map.hasLayer(gminas)) gminas.remove();
-        }
-
-        function setBorders(level, map) {
-            switch(level) {
-                case 0:
-                    removeAllBorders(map);
-                    voivodeships.addTo(map);
-                    break;
-                case 1:
-                    removeAllBorders(map);
-                    powiats.addTo(map);
-                    voivodeships.addTo(map);
-                    
-                    break;
-                case 2:
-                    removeAllBorders(map);
-                    powiats.addTo(map);
-                    break;
-                case 3:
-                    removeAllBorders(map);
-                    gminas.addTo(map);
-                    powiats.addTo(map);
-                    
-                    break;
-                case 4:
-                    removeAllBorders(map);
-                    gminas.addTo(map);
-                    break;
-                default:
-                    removeAllBorders(map);
-                    voivodeships.addTo(map);
-                    break;
-            }
-        }
-
         function onZoomAnim(e) {
             let target = e.target;
             let zoom = target.getZoom();

@@ -7,10 +7,3 @@ async function requestData() {
     });
     return response.json();
 }
-async function requestGeoJsonVoiv() {
-    let response = await fetch("https://github.com/jusuff/PolandGeoJson/blob/main/data/poland.voivodeships.json", {
-        method: "GET",
-        mode: "no-cors"
-    });
-    return response.json();
-}
