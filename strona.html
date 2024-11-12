@@ -1,6 +1,3 @@
-<!--/*Main website HTML
-    Copyright (C) 2024  Jakub Sowula, Gabiel Sokalla, Robert Krzywdziński, Aleksander Mateusz, Kacper Zając*/-->
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,7 +5,7 @@
     <title>Mapa Pogodowa</title>
     <link rel="stylesheet" type="text/css" href="styl.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="autorun.js"></script>
+
 </head>
 <body>
     <div id="map"></div>
@@ -32,7 +29,6 @@
     </div>
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="dataRequests.js"></script>
     <script>
         var map = L.map('map').setView([51, 19], 7);
 
@@ -49,69 +45,70 @@
         
         /*
         const miasta_wspolrzedne = [
-    {nazwa: "Białystok", szerokosc: 53.13, dlugosc: 23.16},
-    {nazwa: "Bielsko Biała", szerokosc: 49.81, dlugosc: 19.04},
-    {nazwa: "Chojnice", szerokosc: 53.7, dlugosc: 17.52},
-    {nazwa: "Częstochowa", szerokosc: 50.81, dlugosc: 19.12},
-    {nazwa: "Elbląg", szerokosc: 54.15, dlugosc: 19.39},
-    {nazwa: "Gdańsk", szerokosc: 54.35, dlugosc: 18.64},
-    {nazwa: "Gorzów", szerokosc: 52.73, dlugosc: 15.22},
-    {nazwa: "Hel", szerokosc: 54.61, dlugosc: 18.79},
-    {nazwa: "Jelenia Góra", szerokosc: 50.88, dlugosc: 15.50},
-    {nazwa: "Kalisz", szerokosc: 51.74, dlugosc: 18.08},
-    {nazwa: "Kasprowy Wierch", szerokosc: 49.22, dlugosc: 20.07},
-    {nazwa: "Katowice", szerokosc: 50.26, dlugosc: 19.02},
-    {nazwa: "Kętrzyn", szerokosc: 54.07, dlugosc: 21.36},
-    {nazwa: "Kielce", szerokosc: 50.86, dlugosc: 20.63},
-    {nazwa: "Kłodzko", szerokosc: 50.43, dlugosc: 16.56},
-    {nazwa: "Koło", szerokosc: 52.07, dlugosc: 18.43},
-    {nazwa: "Kołobrzeg", szerokosc: 54.18, dlugosc: 15.59},
-    {nazwa: "Koszalin", szerokosc: 54.19, dlugosc: 16.18},
-    {nazwa: "Kozienice", szerokosc: 51.60, dlugosc: 21.56},
-    {nazwa: "Kraków", szerokosc: 50.06, dlugosc: 19.94},
-    {nazwa: "Krosno", szerokosc: 49.68, dlugosc: 21.78},
-    {nazwa: "Legnica", szerokosc: 51.21, dlugosc: 16.16},
-    {nazwa: "Lesko", szerokosc: 49.43, dlugosc: 22.67},
-    {nazwa: "Leszno", szerokosc: 51.84, dlugosc: 16.26},
-    {nazwa: "Lębork", szerokosc: 54.57, dlugosc: 17.72},
-    {nazwa: "Lublin", szerokosc: 51.25, dlugosc: 22.57},
-    {nazwa: "Łeba", szerokosc: 54.76, dlugosc: 17.54},
-    {nazwa: "Łódź", szerokosc: 51.76, dlugosc: 19.46},
-    {nazwa: "Mikołajki", szerokosc: 53.81, dlugosc: 21.59},
-    {nazwa: "Mława", szerokosc: 53.10, dlugosc: 20.35},
-    {nazwa: "Nowy Sącz", szerokosc: 49.62, dlugosc: 20.71},
-    {nazwa: "Olsztyn", szerokosc: 53.78, dlugosc: 20.48},
-    {nazwa: "Opole", szerokosc: 50.67, dlugosc: 17.93},
-    {nazwa: "Ostrołęka", szerokosc: 53.01, dlugosc: 21.54},
-    {nazwa: "Piła", szerokosc: 53.15, dlugosc: 16.74},
-    {nazwa: "Platforma", szerokosc: 54.09, dlugosc: 15.50},
-    {nazwa: "Płock", szerokosc: 52.55, dlugosc: 19.71},
-    {nazwa: "Poznań", szerokosc: 52.41, dlugosc: 16.93},
-    {nazwa: "Przemyśl", szerokosc: 49.77, dlugosc: 23.00},
-    {nazwa: "Racibórz", szerokosc: 50.08, dlugosc: 18.21},
-    {nazwa: "Resko", szerokosc: 53.74, dlugosc: 15.52},
-    {nazwa: "Rzeszów", szerokosc: 50.04, dlugosc: 21.98},
-    {nazwa: "Sandomierz", szerokosc: 50.68, dlugosc: 21.74},
-    {nazwa: "Siedlce", szerokosc: 52.08, dlugosc: 22.36},
-    {nazwa: "Słubice", szerokosc: 52.34, dlugosc: 14.56},
-    {nazwa: "Sulejów", szerokosc: 51.45, dlugosc: 19.79},
-    {nazwa: "Suwałki", szerokosc: 54.11, dlugosc: 22.93},
-    {nazwa: "Szczecin", szerokosc: 53.43, dlugosc: 14.55},
-    {nazwa: "Szczecinek", szerokosc: 53.68, dlugosc: 16.24},
-    {nazwa: "Śnieżka", szerokosc: 50.73, dlugosc: 15.73},
-    {nazwa: "Świnoujście", szerokosc: 53.90, dlugosc: 14.25},
-    {nazwa: "Tarnów", szerokosc: 50.01, dlugosc: 20.97},
-    {nazwa: "Terespol", szerokosc: 52.10, dlugosc: 23.19},
-    {nazwa: "Toruń", szerokosc: 53.01, dlugosc: 18.59},
-    {nazwa: "Ustka", szerokosc: 54.58, dlugosc: 16.87},
-    {nazwa: "Warszawa", szerokosc: 52.23, dlugosc: 21.01},
-    {nazwa: "Wieluń", szerokosc: 51.17, dlugosc: 18.48},
-    {nazwa: "Włodawa", szerokosc: 51.29, dlugosc: 23.49},
-    {nazwa: "Wrocław", szerokosc: 51.11, dlugosc: 17.03},
-    {nazwa: "Zakopane", szerokosc: 49.30, dlugosc: 19.97},
-    {nazwa: "Zamość", szerokosc: 50.72, dlugosc: 23.26},
-    {nazwa: "Zielona Góra", szerokosc: 51.94, dlugosc: 15.50}
+    {nazwa: "Białystok", szerokosc: 53.13, dlugosc: 23.16, wojewodztwo: "Podlaskie"},
+    {nazwa: "Bielsko Biała", szerokosc: 49.81, dlugosc: 19.04, wojewodztwo: "Slaskie"},
+    {nazwa: "Chojnice", szerokosc: 53.7, dlugosc: 17.52, wojewodztwo: "Pomorskie"},
+    {nazwa: "Częstochowa", szerokosc: 50.81, dlugosc: 19.12, wojewodztwo: "Slaskie"},
+    {nazwa: "Elbląg", szerokosc: 54.15, dlugosc: 19.39, wojewodztwo: "Warminsko-Mazurskie"},
+    {nazwa: "Gdańsk", szerokosc: 54.35, dlugosc: 18.64, wojewodztwo: "Pomorskie"},
+    {nazwa: "Gorzów", szerokosc: 52.73, dlugosc: 15.22, wojewodztwo: "Lubuskie"},
+    {nazwa: "Hel", szerokosc: 54.61, dlugosc: 18.79, wojewodztwo: "Pomorskie"},
+    {nazwa: "Jelenia Góra", szerokosc: 50.88, dlugosc: 15.50, wojewodztwo: "Dolnoslaskie"},
+    {nazwa: "Kalisz", szerokosc: 51.74, dlugosc: 18.08, wojewodztwo: "Wielkopolskie"},
+    {nazwa: "Kasprowy Wierch", szerokosc: 49.22, dlugosc: 20.07, wojewodztwo: "Malopolskie"},
+    {nazwa: "Katowice", szerokosc: 50.26, dlugosc: 19.02, wojewodztwo: "Slaskie"},
+    {nazwa: "Kętrzyn", szerokosc: 54.07, dlugosc: 21.36, wojewodztwo: "Warminsko-Mazurskie"},
+    {nazwa: "Kielce", szerokosc: 50.86, dlugosc: 20.63, wojewodztwo: "Swietokrzyskie"},
+    {nazwa: "Kłodzko", szerokosc: 50.43, dlugosc: 16.56, wojewodztwo: "Dolnoslaskie"},
+    {nazwa: "Koło", szerokosc: 52.07, dlugosc: 18.43, wojewodztwo: "Wielkopolskie"},
+    {nazwa: "Kołobrzeg", szerokosc: 54.18, dlugosc: 15.59, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Koszalin", szerokosc: 54.19, dlugosc: 16.18, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Kozienice", szerokosc: 51.60, dlugosc: 21.56, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Kraków", szerokosc: 50.06, dlugosc: 19.94, wojewodztwo: "Malopolskie"},
+    {nazwa: "Krosno", szerokosc: 49.68, dlugosc: 21.78, wojewodztwo: "Podkarpackie"},
+    {nazwa: "Legnica", szerokosc: 51.21, dlugosc: 16.16, wojewodztwo: "Dolnoslaskie"},
+    {nazwa: "Lesko", szerokosc: 49.43, dlugosc: 22.67, wojewodztwo: "Podkarpackie"},
+    {nazwa: "Leszno", szerokosc: 51.84, dlugosc: 16.26, wojewodztwo: "Wielkopolskie"},
+    {nazwa: "Lębork", szerokosc: 54.57, dlugosc: 17.72, wojewodztwo: "Pomorskie"},
+    {nazwa: "Lublin", szerokosc: 51.25, dlugosc: 22.57, wojewodztwo: "Lubelskie"},
+    {nazwa: "Łeba", szerokosc: 54.76, dlugosc: 17.54, wojewodztwo: "Pomorskie"},
+    {nazwa: "Łódź", szerokosc: 51.76, dlugosc: 19.46, wojewodztwo: "Lodzkie"},
+    {nazwa: "Mikołajki", szerokosc: 53.81, dlugosc: 21.59, wojewodztwo: "Warminsko-Mazurskie"},
+    {nazwa: "Mława", szerokosc: 53.10, dlugosc: 20.35, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Nowy Sącz", szerokosc: 49.62, dlugosc: 20.71, wojewodztwo: "Malopolskie"},
+    {nazwa: "Olsztyn", szerokosc: 53.78, dlugosc: 20.48, wojewodztwo: "Warminsko-Mazurskie"},
+    {nazwa: "Opole", szerokosc: 50.67, dlugosc: 17.93, wojewodztwo: "Opolskie"},
+    {nazwa: "Ostrołęka", szerokosc: 53.01, dlugosc: 21.54, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Piła", szerokosc: 53.15, dlugosc: 16.74, wojewodztwo: "Wielkopolskie"},
+    {nazwa: "Platforma", szerokosc: 54.09, dlugosc: 15.50, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Płock", szerokosc: 52.55, dlugosc: 19.71, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Poznań", szerokosc: 52.41, dlugosc: 16.93, wojewodztwo: "Wielkopolskie"},
+    {nazwa: "Przemyśl", szerokosc: 49.77, dlugosc: 23.00, wojewodztwo: "Podkarpackie"},
+    {nazwa: "Racibórz", szerokosc: 50.08, dlugosc: 18.21, wojewodztwo: "Slaskie"},
+    {nazwa: "Resko", szerokosc: 53.74, dlugosc: 15.52, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Rzeszów", szerokosc: 50.04, dlugosc: 21.98, wojewodztwo: "Podkarpackie"},
+    {nazwa: "Sandomierz", szerokosc: 50.68, dlugosc: 21.74, wojewodztwo: "Swietokrzyskie"},
+    {nazwa: "Siedlce", szerokosc: 52.08, dlugosc: 22.36, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Słubice", szerokosc: 52.34, dlugosc: 14.56, wojewodztwo: "Lubuskie"},
+    {nazwa: "Sulejów", szerokosc: 51.45, dlugosc: 19.79, wojewodztwo: "Lodzkie"},
+    {nazwa: "Suwałki", szerokosc: 54.11, dlugosc: 22.93, wojewodztwo: "Podlaskie"},
+    {nazwa: "Szczecin", szerokosc: 53.43, dlugosc: 14.55, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Szczecinek", szerokosc: 53.68, dlugosc: 16.24, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Śnieżka", szerokosc: 50.73, dlugosc: 15.73, wojewodztwo: "Dolnoslaskie"},
+    {nazwa: "Świnoujście", szerokosc: 53.90, dlugosc: 14.25, wojewodztwo: "Zachodniopomorskie"},
+    {nazwa: "Tarnów", szerokosc: 50.01, dlugosc: 20.97, wojewodztwo: "Malopolskie"},
+    {nazwa: "Terespol", szerokosc: 52.10, dlugosc: 23.19, wojewodztwo: "Lubelskie"},
+    {nazwa: "Toruń", szerokosc: 53.01, dlugosc: 18.59, wojewodztwo: "Kujawsko-Pomorskie"},
+    {nazwa: "Ustka", szerokosc: 54.58, dlugosc: 16.87, wojewodztwo: "Pomorskie"},
+    {nazwa: "Warszawa", szerokosc: 52.23, dlugosc: 21.01, wojewodztwo: "Mazowieckie"},
+    {nazwa: "Wieluń", szerokosc: 51.17, dlugosc: 18.48, wojewodztwo: "Lodzkie"},
+    {nazwa: "Włodawa", szerokosc: 51.29, dlugosc: 23.49, wojewodztwo: "Lubelskie"},
+    {nazwa: "Wrocław", szerokosc: 51.11, dlugosc: 17.03, wojewodztwo: "Dolnoslaskie"},
+    {nazwa: "Zakopane", szerokosc: 49.30, dlugosc: 19.97, wojewodztwo: "Malopolskie"},
+    {nazwa: "Zamość", szerokosc: 50.72, dlugosc: 23.26, wojewodztwo: "Lubelskie"},
+    {nazwa: "Zielona Góra", szerokosc: 51.94, dlugosc: 15.50, wojewodztwo: "Lubuskie"}
 ];
+
     function getKolorDlaTemperatury(temperatura) {
     if (temperatura > 40) return 'rgb(112, 9, 9)';
     if (temperatura > 39) return 'rgb(120, 12, 12)';
@@ -213,6 +210,7 @@
     return 'rgb(0, 0, 0)'; 
         }
 
+        
         async function pobierzDanePogodowe() {
     const response = await window.fetch("http://mapapogoda.pl:8000/data/", { method: "GET" });
     const data = await response.json();
@@ -291,7 +289,10 @@
         document.getElementById('Opady').onclick = rysujOpady;
         document.getElementById('Cisnienie').onclick = rysujCisnienie;
         */
-        
+
+        //DUPA
+        //SRAKA
+        //GÓWNO
     </script>
 </body>
 </html>
