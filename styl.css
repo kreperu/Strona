@@ -1,0 +1,84 @@
+*{
+    #map {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+    }
+    #sidebar {
+        position: absolute;
+        width:100px;
+        height:200px;
+        top: 13%; 
+        right: 10px;
+        transform: translateY(-50%); 
+        background: rgba(0, 183, 255, 0.8); 
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+    #sidebar2{
+        position: absolute;
+        width:100px;
+        height:200px;
+        top: 13%; 
+        right: 140px;
+        transform: translateY(-50%); 
+        background: rgba(0, 183, 255, 0.8); 
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+    #sidebar3{
+        position: absolute;
+        width:100px;
+        height:200px;
+        top: 13%; 
+        right: 270px;
+        transform: translateY(-50%); 
+        background: rgba(0, 183, 255, 0.8); 
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+    button {
+        margin-bottom: 5px;
+        width: 100%; 
+    }
+    button:hover{
+        scale: 1.2;
+        background: rgb(80, 160, 197);
+        transition: 0.1s;
+     }
+    #sidebar:hover{
+        scale: 2;
+        background: rgba(0, 183, 255, 0.8);
+        transition: 0.1s;
+        top: 37%; 
+        right: 70px;
+        
+    }
+    #sidebar2:hover{
+        scale: 2;
+        background: rgba(0, 183, 255, 0.8);
+        transition: 0.1s;
+        top: 37%; 
+        right: 200px;
+    }
+    #sidebar3:hover{
+        scale: 2;
+        background: rgba(0, 183, 255, 0.8);
+        transition: 0.1s;
+        top: 37%; 
+        right: 330px;
+    }
+
+}
