@@ -1,11 +1,25 @@
 <!--/*Test HTML
-    Copyright (C) 2024  Jakub Sowula, Gabiel Sokalla, Robert Krzywdziński, Aleksander Mateusz, Kacper Zając*/-->
+    Copyright (C) 2024  Jakub Sowula, Gabriel Sokalla, Robert Krzywdziński, Mateusz Aleksander, Kacper Zając*/-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        :root {
+            --dark-bg: #3c3836;
+            --light-bg: #ebdbb2;
+
+            --set-bg: var(--dark-bg);
+            --set-fg: var(--light-bg);
+            --brightness: 130%;
+            --saturation: 500%;
+            --hue: -20deg;
+            --bright-push: 10%;
+            --sat-push: 250%;
+        }
+    </style>
     <script src="autorun.js"></script>
     <link rel="stylesheet" href="dataDisplay.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -13,14 +27,20 @@
     <script src="voivodeships.json"></script>
     <script src="powiaty.json"></script>
     <script src="gminy.json"></script>
+    
 
-    <script src="config.js"></script>
-    <script src="dataRequests.js"></script>
-    <script src="dataDisplay.js"></script>
+    
 </head>
 <body>
     <div id="map"></div>
+    <div id="labels"></div>
+    
+    <script src="config.js"></script>
+    <script src="dataRequests.js"></script>
+    <script src="dataDisplay.js"></script>
     <script>
+        
+        console.log(document.body.style);
         function onZoomAnim(e) {
             let target = e.target;
             let zoom = target.getZoom();
@@ -34,8 +54,13 @@
         }
 
         var map = L.map('map').setView([51.919438, 19.145136], 6);
+        map.createPane('labels');
+        map.getPane('labels').style.zIndex = 650;
+        map.getPane('labels').style.pointerEvents = 'none';
+        document.getElementById("map").style.filter = colorMode == "dark" ? "sepia(100%)" : "";
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+        var actMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_nolabels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'});
+        actMap.addTo(map);
 
         let cornerltpl = L.latLng(54.84+1, 14.12-1);
         let cornerrbpl = L.latLng(49-1, 24.14585+1)
@@ -45,5 +70,9 @@
 
         voivodeships.addTo(map);
     </script>
+    <script src="accessBar.js"></script>
+    <div id="accessBar">
+        <button id="modeButton" class="accButton" onclick="onClickBLeft()"><img src="images/lightbulbOn.png" alt="Lightbulb On"></button>
+    </div>
 </body>
 </html>

@@ -1,9 +1,20 @@
 /*Data display script
-    Copyright (C) 2024  Jakub Sowula, Gabiel Sokalla, Robert Krzywdziński, Aleksander Mateusz, Kacper Zając*/
+    Copyright (C) 2024  Jakub Sowula, Gabriel Sokalla, Robert Krzywdziński, Mateusz Aleksander, Kacper Zając*/
 
-    var voivodeships = new L.GeoJSON(voiv, {style: {fillColor:'#ff0000',fillOpacity:0.01,weight:4,opacity:1,color:'#ff0000'}});
-    var powiats = new L.GeoJSON(powiat, {style: {fillColor:'#ff00ff',fillOpacity:0.01,weight:2,opacity:1,color:'#ff00ff'}});
-    var gminas = new L.GeoJSON(gmina, {style: {fillColor: '#0000ff',fillOpacity:0.05,weight:1,opacity:1,color:'#0000dd'}});
+    function styleFeature(feature, latlng) {
+        let randnum = (Math.random()-0.44)*78;
+        return {
+            fillColor:generateTempColor(randnum),
+            fillOpacity:0.7,
+            weight:4,
+            opacity:1,
+            color:lineColor
+        };
+    }
+
+    var voivodeships = new L.GeoJSON(voiv, {style: styleFeature});
+    var powiats = new L.GeoJSON(powiat, {style: styleFeature});
+    var gminas = new L.GeoJSON(gmina, {style: styleFeature});
 
     function removeAllBorders(map) {
         if(map.hasLayer(voivodeships)) voivodeships.remove();
@@ -43,3 +54,5 @@
                 break;
         }
     }
+
+    
