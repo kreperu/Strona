@@ -27,7 +27,6 @@
     <script src="voivodeships.json"></script>
     <script src="powiaty.json"></script>
     <script src="gminy.json"></script>
-    <script src="cityCorellation.json"></script>
     
 
     
@@ -51,7 +50,7 @@
             let diffLatLng = L.latLng(minLatLng["lat"]/maxLatLng["lat"], maxLatLng["lng"]/minLatLng["lng"])
             let diffAvg = (diffLatLng["lat"] + diffLatLng["lng"])/2;
             setBorders(Math.round(borderLevel(diffAvg)), target);
-            console.log(diffAvg);
+            console.log(Math.round(borderLevel(diffAvg)));
         }
 
         var map = L.map('map').setView([51.919438, 19.145136], 6);
@@ -62,9 +61,6 @@
 
         var actMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_nolabels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'});
         actMap.addTo(map);
-
-        var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_only_labels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>', pane: 'labels'});
-        labels.addTo(map);
 
         let cornerltpl = L.latLng(54.84+1, 14.12-1);
         let cornerrbpl = L.latLng(49-1, 24.14585+1)

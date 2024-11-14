@@ -34,8 +34,7 @@ function updateColorMode() {
 updateColorMode();
 
 function borderLevel(x) {
-    let ret = 3.268 * Math.pow(x, -7.317);
-    return (ret < 2.5 && ret > 1.5) ? (Math.floor(ret) == 2 ? 3 : 1) : ret;
+    return 3.899 * Math.pow(x, -8.915);
 }
 
 function generateTempR(t) {

@@ -18,12 +18,16 @@ body {
     height: 5vh;
     left: -3px;
     bottom: -3px;
+    translate: 0px 4.5vh;
     background-color: var(--set-bg);
     border: var(--set-fg) 5px solid;
     border-collapse: collapse;
     border-radius: 10%;
     transition: translate 0.5s;
     z-index: 1000;
+}
+#accessBar:hover {
+    translate: 0px 0vh;
 }
 
 .accButton {
