@@ -28,6 +28,7 @@
     <script src="powiaty.json"></script>
     <script src="gminy.json"></script>
     <script src="cityCorellation.json"></script>
+    <script src="gen.json"></script>
     
 
     
@@ -37,11 +38,18 @@
     <div id="labels"></div>
     
     <script src="config.js"></script>
-    <script src="dataRequests.js"></script>
+    <script src="dataRequests.js">var weatherData = requestData();</script>
     <script src="dataDisplay.js"></script>
     <script>
+        var actMap;
+        var map;
+
+        var voivodeships;
+        var powiats;
+        var gminas;
+
+        var retryCount = 0;
         
-        console.log(document.body.style);
         function onZoomAnim(e) {
             let target = e.target;
             let zoom = target.getZoom();
@@ -54,25 +62,44 @@
             console.log(diffAvg);
         }
 
-        var map = L.map('map').setView([51.919438, 19.145136], 6);
-        map.createPane('labels');
-        map.getPane('labels').style.zIndex = 650;
-        map.getPane('labels').style.pointerEvents = 'none';
-        document.getElementById("map").style.filter = colorMode == "dark" ? "sepia(100%)" : "";
+        function entryPoint() {
+            if(weatherData == null || weatherData == undefined || weatherData == {}) {
+                if(retryCount >= 5) {
+                    document.write("ERROR, Server not responding!<br>Please try again later<br>If the problem persists please contact kripkrep@gmail.com<hr>");
+                    return 1;
+                }
+                setTimeout(() => entryPoint(), 1000);
+                ++retryCount;
+                return 1;
+            }
+            voivodeships = new L.GeoJSON(voiv, {style: styleVoivodeships});
+            powiats = new L.GeoJSON(powiat, {style: stylePowiats});
+            gminas = new L.GeoJSON(gmina, {style: styleGminas});
 
-        var actMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_nolabels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'});
-        actMap.addTo(map);
+            console.log(document.body.style);
 
-        var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_only_labels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>', pane: 'labels'});
-        labels.addTo(map);
+            map = L.map('map').setView([51.919438, 19.145136], 6);
+            map.createPane('labels');
+            map.getPane('labels').style.zIndex = 650;
+            map.getPane('labels').style.pointerEvents = 'none';
+            document.getElementById("map").style.filter = colorMode == "dark" ? "sepia(100%)" : "";
 
-        let cornerltpl = L.latLng(54.84+1, 14.12-1);
-        let cornerrbpl = L.latLng(49-1, 24.14585+1)
-        let bounds = L.latLngBounds(cornerltpl, cornerrbpl);
-        map.setMaxBounds(bounds);
-        map.on("zoom", onZoomAnim);
+            actMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_nolabels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'});
+            actMap.addTo(map);
 
-        voivodeships.addTo(map);
+            var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + colorMode + '_only_labels/{z}/{x}/{y}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>', pane: 'labels'});
+            labels.addTo(map);
+
+            let cornerltpl = L.latLng(54.84+1, 14.12-1);
+            let cornerrbpl = L.latLng(49-1, 24.14585+1)
+            let bounds = L.latLngBounds(cornerltpl, cornerrbpl);
+            map.setMaxBounds(bounds);
+            map.on("zoom", onZoomAnim);
+
+            voivodeships.addTo(map);
+            document.getElementById("map").style.filter = colorMode == "dark" ? "sepia(20%)" : "sepia(0%)";
+        }
+        setTimeout(() => entryPoint(), 1000)
     </script>
     <script src="accessBar.js"></script>
     <div id="accessBar">
