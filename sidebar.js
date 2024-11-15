@@ -18,6 +18,10 @@ function miasto(e){
     document.getElementById("cityname").innerHTML = e.target.feature.properties.name;
     miasto.style.display = "none";
     sidebar.style.display = (sidebar.style.display === "none" || sidebar.style.display === "") ? "block" : "none";
-    document.getElementById("lm").innerHTML = "Ostatni pomiar:" + String(new Date().getHours());
-    document.getElementById("nm").innerHTML = "Następny pomiar:" + String(new Date().getHours()+1);
+    document.getElementById("lm").innerHTML = "Ostatni pomiar: " + String(new Date().getHours()) + ":00";
+    document.getElementById("nm").innerHTML = "Następny pomiar: " + String(new Date().getHours()+1) + ":00";
+    document.getElementById("tmp").innerHTML = "Temperatura: " + weatherData.synop[corellations[e.target.feature.properties.name]]["temperatura"] + " °C";
+    document.getElementById("ws").innerHTML = "Prędkość wiatru: " + weatherData.synop[corellations[e.target.feature.properties.name]]["predkosc_wiatru"] + " m/s";
+    document.getElementById("rain").innerHTML = "Opady: " + weatherData.synop[corellations[e.target.feature.properties.name]]["suma_opadu"] + " mm";
+    document.getElementById("press").innerHTML = "Ciśnienie: " + weatherData.synop[corellations[e.target.feature.properties.name]]["cisnienie"] + " hPa";
 }

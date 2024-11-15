@@ -161,7 +161,7 @@
         <pre id="tmp">Temperatura:</pre>
         <pre id="ws">Prędkość wiatru:</pre>
         <pre id="rain">Opady:</pre>
-        <pre id="press">Ciśnienie</pre>
+        <pre id="press">Ciśnienie:</pre>
     </div>
     <div id="sidebar-container">
         <div id="suwak" onclick="toggleSidebar()"><?xml version="1.0" encoding="utf-8"?>
@@ -175,6 +175,26 @@
             <button id="suma_opadu" class="toggle-button" onclick="toggleActive(this)">Opady</button>
             <button id="cisnienie" class="toggle-button" onclick="toggleActive(this)">Ciśnienie</button>
     </div>
+    </div>
+    <script>
+        function enterCity(e) {
+            if(e.key == "Enter") {
+                let value = e.target.value.toLowerCase();
+                value = value.charAt(0).toUpperCase() + value.slice(1);
+                let data = cityCorellation[value];
+                let lat = parseFloat(data[1]);
+                let lng = parseFloat(data[2]);
+                let c1 = L.latLng(lat+0.1, lng+0.1);
+                let c2 = L.latLng(lat-0.1, lng-0.1);
+                let bounds = L.latLngBounds(c1, c2);
+                map.fitBounds(bounds);
+            }
+        }
+    </script>
+    <div id="search">
+        <form onsubmit="return false;">
+            <input type="text" placeholder="Miasto..." onkeypress="enterCity(event)">
+        </form>
     </div>
 </div>
     <script>
