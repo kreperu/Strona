@@ -6,12 +6,12 @@ var colorMode = "dark" //"dark" or "light";
 //var colorMode = "light";
 var lineColor = colorMode == "light" ? "#3c3836" : "#3c3836";
 
-var displayDataType = "predkosc_wiatru";
+var displayDataType = "temperatura";
 
 let st = document.body.style;
 function sp(key, val) {st.setProperty("--"+key,val);}
 
-var exageration = 5;
+var exageration = 1;
 
 function updateColorMode() {
     lineColor = colorMode == "light" ? "#3c3836" : "#504945";

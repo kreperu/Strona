@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="stylesheet" type="text/css" href="waznycss.css">
+</head>
+<body>
+    <script>
+        function wojewodztwo() {
+            const sidebar = document.getElementById("woj_sidebar");
+            const wojewodztwo = document.getElementById("miasto");
+            wojewodztwo.style.display = "none";
+            sidebar.style.display = (sidebar.style.display === "none" || sidebar.style.display === "") ? "block" : "none";
+        }
+
+        function miasto(){
+            const sidebar = document.getElementById("miasto");
+            const miasto = document.getElementById("woj_sidebar");
+            miasto.style.display = "none";
+            sidebar.style.display = (sidebar.style.display === "none" || sidebar.style.display === "") ? "block" : "none";
+        }
+
+        function toggleSidebar() {
+            const suwak = document.getElementById("suwak");
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.display = (sidebar.style.display === "none" || sidebar.style.display === "") ? "block" : "none";
+            suwak.style.display = sidebar.style.display === "block" ? "none" : "block";
+        }
+
+        window.onload = function() {
+    var aGodzElements = document.getElementsByClassName("a_godz");
+    var currentHour = new Date().getHours();
+    var currentMinute = new Date().getMinutes();
+            if(currentMinute < 10){
+                var initialTime = String(currentHour) +":0"+ String(currentMinute);
+            }
+            else{
+                var initialTime = String(currentHour) +":"+ String(currentMinute);
+            }
+    
+    for (var j = 0; j < aGodzElements.length; j++) {
+        aGodzElements[j].textContent = initialTime;
+    }
+
+    var godzElements = document.getElementsByClassName("godzina");
+    for (var i = 0; i < godzElements.length; i++) {
+        var godzina = String((currentHour - (i % 4) - 1 + 24) % 24) + ":00";
+        godzElements[i].textContent = godzina;
+    }
+    document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById("sidebar");
+            const suwak = document.getElementById("suwak");
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnSuwak = suwak.contains(event.target);
+
+            if (!isClickInsideSidebar && !isClickOnSuwak) {
+                sidebar.style.display = "none";
+                suwak.style.display = "block";
+            }
+        });
+};
+    </script>
+    <svg height="260" width="500">
+        <polygon points="220,10 300,210 170,250 123,234" onclick="wojewodztwo()" style="cursor: pointer;" />
+        <polygon points="320,20 400,310 270,350 223,334" onclick="miasto()" style="cursor: pointer;"/>
+      </svg> 
+    <div id="woj_sidebar"  style="display: none;">
+        <h3>(wojewodztwo)</h3>
+        <pre>aktualna godzina:</pre><pre class="a_godz"></pre>
+        <pre>ostatni pomiar:</pre>
+        <pre>następny pomiar:</pre>
+        <pre>średnia temperatura:</pre>
+        <pre>średnia prędkość wiatru:</pre>
+        <pre>średnia średni kierunek wiatru:</pre>
+        <pre>średnie opady:</pre>
+        <pre>średnie ciśnienie:</pre>
+        <table>
+            <tr>
+                <td>godzina</td>
+                <td class="godzina"></td>
+                <td class="godzina"></td>
+                <td class="godzina"></td>
+                <td class="godzina"></td>
+                
+            </tr>
+            <tr>
+                <td>średnia temperatura</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>średnia prędkość wiatru</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>średni kierunek wiatru</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>średnie opady</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>średnie ciśnenie</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               
+            </tr>
+        </table>
+    </div>
+    <div id="miasto" style="display: none;">
+<h3>(miasto)</h3>
+<pre>aktualna godzina:</pre><pre class="a_godz"></pre>
+<pre>ostatni pomiar:</pre>
+<pre>następny pomiar:</pre>
+<pre>temperatura:</pre>
+<pre>prędkość wiatru:</pre>
+<pre>kierunek wiatru</pre>
+<pre>opady:</pre>
+<pre>ciśnienie</pre>
+<table>
+    <tr>
+        <td>godzina</td>
+        <td class="godzina"></td>
+        <td class="godzina"></td>
+        <td class="godzina"></td>
+        <td class="godzina"></td>
+        
+    </tr>
+    <tr>
+        <td>temperatura</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+    </tr>
+    <tr>
+        <td>prędkość wiatru</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+    </tr>
+    <tr>
+        <td>kierunek wiatru</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td>opady</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td>ciśnienie</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+</table>
+</div>
+<div id="sidebar-container">
+    <div id="suwak" onclick="toggleSidebar()"><?xml version="1.0" encoding="utf-8"?>
+        <svg width="50px" height="50px" viewBox="0 0 20 20" fill="none" author="afnizarnur">
+          <path fill="#000000" fill-rule="evenodd" d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z"/>
+        </svg></div>
+<div id="sidebar">
+    
+
+        <h3>dane pogodowe</h3>
+        <button id="Temperatura" class="toggle-button" onclick="toggleActive(this)">Temperatura</button>
+        <button id="k_Wiatr" class="toggle-button" onclick="toggleActive(this)">Kierunek wiatru</button>
+        <button id="p_Wiatr" class="toggle-button" onclick="toggleActive(this)">Prędkość wiatru</button>
+        <button id="Opady" class="toggle-button" onclick="toggleActive(this)">Opady</button>
+        <button id="Cisnienie" class="toggle-button" onclick="toggleActive(this)">Ciśnienie</button>
+        <button id="Warnings" class="toggle-button" onclick="toggleActive(this)">Ostrzeżenia pogodowe</button>
+
+</div>
+</div>
+
+</body>
+</html>

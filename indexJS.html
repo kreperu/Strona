@@ -22,6 +22,7 @@
     </style>
     <script src="autorun.js"></script>
     <link rel="stylesheet" href="dataDisplay.css">
+    <link rel="stylesheet" href="waznycss.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="voivodeships.json"></script>
@@ -29,6 +30,7 @@
     <script src="gminy.json"></script>
     <script src="cityCorellation.json"></script>
     <script src="gen.json"></script>
+    <script src="sidebar.js"></script>
     
 
     
@@ -49,6 +51,16 @@
         var gminas;
 
         var retryCount = 0;
+
+        function handleCityClick(e) {
+            miasto(e);
+        }
+
+        function onEachCityFeature(feature, layer) {
+            layer.on({
+                click: handleCityClick
+            });
+        }
         
         function onZoomAnim(e) {
             let target = e.target;
@@ -74,7 +86,7 @@
             }
             voivodeships = new L.GeoJSON(voiv, {style: styleVoivodeships});
             powiats = new L.GeoJSON(powiat, {style: stylePowiats});
-            gminas = new L.GeoJSON(gmina, {style: styleGminas});
+            gminas = new L.GeoJSON(gmina, {style: styleGminas, onEachFeature: onEachCityFeature});
 
             console.log(document.body.style);
 
@@ -95,15 +107,88 @@
             let bounds = L.latLngBounds(cornerltpl, cornerrbpl);
             map.setMaxBounds(bounds);
             map.on("zoom", onZoomAnim);
-
+            
             voivodeships.addTo(map);
             document.getElementById("map").style.filter = colorMode == "dark" ? "sepia(20%)" : "sepia(0%)";
+
+            var aGodzElements = document.getElementsByClassName("a_godz");
+            var currentHour = new Date().getHours();
+            var currentMinute = new Date().getMinutes();
+            if(currentMinute < 10){
+                var initialTime = String(currentHour) +":0"+ String(currentMinute);
+            }
+            else{
+                var initialTime = String(currentHour) +":"+ String(currentMinute);
+            }
+    
+        for (var j = 0; j < aGodzElements.length; j++) {
+            aGodzElements[j].textContent = initialTime;
+        }
+
+        var godzElements = document.getElementsByClassName("godzina");
+        for (var i = 0; i < godzElements.length; i++) {
+            var godzina = String((currentHour - (i % 4) - 1 + 24) % 24) + ":00";
+            godzElements[i].textContent = godzina;
+        }
+
+            document.getElementById("novis").style.display = "flex";
         }
         setTimeout(() => entryPoint(), 1000)
     </script>
     <script src="accessBar.js"></script>
+
+<div id="novis" style="display: none;">
     <div id="accessBar">
         <button id="modeButton" class="accButton" onclick="onClickBLeft()"><img src="images/lightbulbOn.png" alt="Lightbulb On"></button>
     </div>
+
+    <div id="woj_sidebar"  style="display: none;">
+        <h3>(wojewodztwo)</h3>
+        <pre>aktualna godzina:</pre><pre class="a_godz"></pre>
+        <pre>ostatni pomiar:</pre>
+        <pre>następny pomiar:</pre>
+        <pre>średnia temperatura:</pre>
+        <pre>średnia prędkość wiatru:</pre>
+        <pre>średnia średni kierunek wiatru:</pre>
+        <pre>średnie opady:</pre>
+        <pre>średnie ciśnienie:</pre>
+    </div>
+    <div id="miasto" style="display: none;">
+        <h3 id="cityname">(miasto)</h3>
+        <pre>Aktualna godzina:</pre><pre class="a_godz"></pre>
+        <pre id="lm">Ostatni pomiar:</pre>
+        <pre id="nm">Następny pomiar:</pre>
+        <pre id="tmp">Temperatura:</pre>
+        <pre id="ws">Prędkość wiatru:</pre>
+        <pre id="rain">Opady:</pre>
+        <pre id="press">Ciśnienie</pre>
+    </div>
+    <div id="sidebar-container">
+        <div id="suwak" onclick="toggleSidebar()"><?xml version="1.0" encoding="utf-8"?>
+            <svg width="50px" height="50px" viewBox="0 0 20 20" fill="none" author="afnizarnur">
+              <path fill="#000000" fill-rule="evenodd" d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z"/>
+            </svg></div>
+    <div id="sidebar">
+            <h3>Dane Pogodowe</h3>
+            <button id="temperatura" class="toggle-button" onclick="toggleActive(this)">Temperatura</button>
+            <button id="predkosc_wiatru" class="toggle-button" onclick="toggleActive(this)">Prędkość wiatru</button>
+            <button id="suma_opadu" class="toggle-button" onclick="toggleActive(this)">Opady</button>
+            <button id="cisnienie" class="toggle-button" onclick="toggleActive(this)">Ciśnienie</button>
+    </div>
+    </div>
+</div>
+    <script>
+        document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById("sidebar");
+                const suwak = document.getElementById("suwak");
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnSuwak = suwak.contains(event.target);
+
+                if (!isClickInsideSidebar && !isClickOnSuwak) {
+                    sidebar.style.translate = "15vw";
+                    suwak.style.display = "block";
+                }
+            });
+    </script>
 </body>
 </html>

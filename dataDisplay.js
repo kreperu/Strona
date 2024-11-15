@@ -55,7 +55,7 @@
         else if(displayDataType == "predkosc_wiatru") color = generateWindColor(data);
         else if(displayDataType == "suma_opadu") color = generateRainColor(data);
         else color = "#000000";
-        return Object.assign({}, genericStyle, {fillColor:color,fillOpacity:0.4});
+        return Object.assign({}, genericStyle, {fillColor:color,fillOpacity:0.7});
     }
     function stylePowiats(feature, latlng) {
         return Object.assign({}, genericStyle, {fillOpacity:0, weight: 6});
@@ -104,8 +104,9 @@
                 break;
             case 3:
                 removeAllBorders(map);
-                gminas.addTo(map);
+                
                 powiats.addTo(map);
+                gminas.addTo(map);
                 
                 break;
             case 4:
@@ -119,4 +120,3 @@
         }
     }
 
-    

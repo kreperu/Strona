@@ -1,5 +1,10 @@
+* {
+    font-family: monospace;
+}
+
 body {
     overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 #map {

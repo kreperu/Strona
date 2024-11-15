@@ -1,0 +1,80 @@
+#suwak {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -5px;
+    right: -5px;
+    background: var(--set-bg);
+    border-radius: 5px;
+    border: 3px solid var(--set-fg);
+    cursor: pointer;
+}
+
+
+#sidebar {
+    display: flex;
+    position: absolute;
+    color: var(--set-fg);
+    width: 15vw;
+    height: 100vh;
+    top: -5px;
+    right: -5px;
+    background: var(--set-bg);
+    border-radius: 5px;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid var(--set-fg);
+    translate: 15vw 0px;
+    transition: translate 0.1s;
+}
+
+.toggle-button {
+    display: flex;
+    margin-bottom: 0vh;
+    width: 100%;
+    height: 10%;
+    left: 0px;
+    float: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    cursor: pointer;
+    color: var(--set-fg);
+    background-color: var(--set-bg);
+    transition: background-color 0.2s;
+    text-align: center;
+    font-size: 110%;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle-button:hover {
+    color: var(--set-bg);
+    background-color: var(--set-fg);
+    transition: 0.1s;
+}
+.toggle-button:active{
+    background-color: lightgray;
+}
+#woj_sidebar, #miasto {
+    display: none;
+    position: absolute;
+    width: 300px;
+    height: 550px;
+    bottom: -5px;
+    right: -5px;
+    background: var(--set-bg);
+    color: var(--set-fg);
+    border-radius: 0px;
+    padding: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--set-fg);
+}
+
+h3 {
+    text-align: center;
+    font-size: 120%;
+}
